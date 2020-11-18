@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: zoomdata-setup
+  name: zoomdata-setup
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: zoomdata-setup
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: zoomdata-setup
+    spec:
+      containers:
+        - image: ' '
+          name: zoomdata-setup
+          resources: {}
+      hostname: zoomdata-setup
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - zoomdata-setup
+        from:
+          kind: ImageStreamTag
+          name: zoomdata-setup:latest
+      type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
